@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        #contact {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: greenyellow;
+            border: 1px solid whitesmoke;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-style: normal;
+        }
+
+        input, textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        input, textarea:hover {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #err {
+            color: red;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .name, .email, .message {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 16px;
+        }
+
+        #submit:hover {
+            background-color: aqua;
+            color: red;
+            transform: translate(0, -2px);
+            transition: background-color 0.5s ease, color 0.3s ease, transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <form id="contact">
+        <h1 style="text-align: center;">Contact Form</h1>
+        <label for="name" style="text-align: center;">Name: </label>
+        <input type="text" id="name" name="name">
+        <div id="name-err" class="error"></div>
+        <br><br>
+        <label for="email" style="text-align: center;">Email: </label>
+        <input type="text" id="email" name="email">
+        <div id="email-err" class="error"></div> 
+        <br><br>
+        <label for="message" style="text-align: center;">Message: </label>
+        <textarea id="message" name="message"></textarea>
+        <div id="message-err" class="error"></div>
+        <br><br>
+        <input id="submit" type="submit" value="Submit">
+    </form>
+</body>
+<script>
+    const form = document.getElementById('contact');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        if (name == '') {
+            alert('Please Enter Your Name');
+            return;
+        }
+
+        if (email == '' ) {
+            alert("Please enter your email");
+            return;
+        }
+
+        if (message == '') {
+            alert("Please enter your message");
+            return;
+        }
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address");
+            return;
+        }
+
+        if (name === '') {
+            document.getElementById('name-err').innerHTML = 'Please Enter Your Name';
+            return;
+        }
+
+        if (email == '') {
+            document.getElementById('email-err').innerHTML = 'Please Enter Your Email';
+            return;
+        }
+
+        if (message == '') {
+            document.getElementById(',essage-err').innerHTML = 'Please Enter Your Message';
+            return;
+        }
+
+        // If all validations pass, you can process the form data
+        // For demonstration, we'll just log the values to the console
+
+        console.log(`Name: ${name}, Email: ${email}, Message: ${message}`);
+        alert('Form submitted successfully!');
+
+        form.reset();
+
+        // Optionally, you can send the data to a server here
+        // fetch('/submit', {
+        //     method: 'POST',
+        //     body: JSON.stringify({ name, email, message }),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+
+    })
+</script>
+</html>
